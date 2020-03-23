@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+	<external-path
+		name="external_file"
+		path="."/>
+	<files-path
+		name="file_path"
+		path="."/>
+	<external-files-path
+		name="path1"
+		path="."/>
+	<cache-path
+		name="path2"
+		path="."/>
+	<external-cache-path
+		name="path3"
+		path="."/>
+	<external-path
+		name="path4"
+		path="DCIM/Camera"/>
+	<external-path
+		name="path5"
+		path="Pictures"/>
+</paths>

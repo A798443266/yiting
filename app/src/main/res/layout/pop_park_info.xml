@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:id="@+id/root"
+	android:background="#fff"
+	android:paddingLeft="15dp"
+	android:paddingRight="15dp"
+	app:cardCornerRadius="5dp"
+	app:cardElevation="3dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:padding="15dp">
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:id="@+id/tv_name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="浙江理工大学停车场"
+				android:layout_centerVertical="true"
+				android:textColor="#222"
+				android:textSize="16sp"
+				android:textStyle="bold" />
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="15dp"
+				android:layout_toRightOf="@+id/tv_name"
+				android:background="@drawable/green_border"
+				android:padding="3dp"
+				android:paddingLeft="5dp"
+				android:paddingRight="5dp">
+
+				<TextView
+					android:id="@+id/tv_quantity_info"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textSize="10sp"
+					android:text="停车场" />
+			</RelativeLayout>
+
+			<ImageView
+				android:id="@+id/iv_close"
+				android:layout_width="13dp"
+				android:layout_height="13dp"
+				android:padding="5dp"
+				android:layout_alignParentRight="true"
+				android:background="@drawable/icon_cha_gray"/>
+		</RelativeLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp">
+
+			<TextView
+				android:id="@+id/tv_address"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="白杨街道浙江理工大学下沙校区"
+				android:textColor="#666"
+				android:textSize="14sp" />
+
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:gravity="center_vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="剩余车位:"
+				android:textColor="#333"
+				android:textSize="15sp" />
+
+			<RelativeLayout
+				android:layout_width="30dp"
+				android:layout_height="30dp"
+				android:layout_marginLeft="20dp"
+				android:background="@drawable/circle">
+
+				<TextView
+					android:id="@+id/tv_cur"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+					android:text="56"
+					android:textColor="@color/systemWhite"
+					android:textSize="14sp"
+					android:textStyle="bold" />
+			</RelativeLayout>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp">
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/blue_border"
+				android:padding="3dp"
+				android:paddingLeft="5dp"
+				android:paddingRight="5dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textSize="10sp"
+					android:text="电子支付" />
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="15dp"
+				android:background="@drawable/blue_border"
+				android:padding="3dp"
+				android:paddingLeft="5dp"
+				android:paddingRight="5dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textSize="10sp"
+					android:text="现金支付" />
+			</RelativeLayout>
+		</LinearLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginTop="10dp"
+			android:background="#bfbfbf" />
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp">
+
+			<LinearLayout
+				android:id="@+id/ll_detail"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:gravity="center_vertical">
+
+				<ImageView
+					android:layout_width="15dp"
+					android:layout_height="15dp"
+					android:background="@drawable/icon_detail" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="8dp"
+					android:text="查看详情"
+					android:textColor="#555"
+					android:textSize="14sp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:layout_alignParentRight="true"
+				android:orientation="horizontal"
+				android:layout_centerVertical="true">
+
+				<Button
+					android:id="@+id/btn1"
+					android:layout_width="65dp"
+					android:layout_height="28dp"
+					android:background="@drawable/button_bg"
+					android:text="预 约"
+					android:textColor="@color/systemWhite"
+					android:textSize="15sp"
+					android:textStyle="bold" />
+
+				<Button
+					android:id="@+id/btn2"
+					android:layout_width="65dp"
+					android:layout_height="28dp"
+					android:layout_marginLeft="15dp"
+					android:background="@drawable/button_bg"
+					android:text="导 航"
+					android:textColor="@color/systemWhite"
+					android:textSize="15sp"
+					android:textStyle="bold" />
+			</LinearLayout>
+		</RelativeLayout>
+
+
+	</LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

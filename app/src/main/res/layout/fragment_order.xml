@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		android:layout_marginTop="30dp">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:text="订单"
+			android:textColor="#333"
+			android:textSize="18sp"
+			android:textStyle="bold" />
+
+	</RelativeLayout>
+
+	<com.flyco.tablayout.SlidingTabLayout
+		android:id="@+id/tab_layout"
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:paddingTop="5dp"
+		android:paddingBottom="5dp"
+		app:tl_indicator_color="@color/systemColor"
+		app:tl_indicator_corner_radius="1dp"
+		app:tl_indicator_height="2dp"
+		app:tl_indicator_width="20dp"
+		app:tl_tab_space_equal="false"
+		app:tl_textBold="SELECT"
+		app:tl_textSelectColor="#333"
+		app:tl_textUnselectColor="#888"
+		app:tl_textsize="15sp" />
+
+	<androidx.viewpager.widget.ViewPager
+		android:id="@+id/vp"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" />
+
+
+</LinearLayout>

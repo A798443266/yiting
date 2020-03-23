@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#fafafa"
+	android:orientation="vertical"
+	tools:context=".activity.ReleaseParkActivity">
+
+	<include
+		android:id="@+id/bar"
+		layout="@layout/title_bar" />
+
+	<ScrollView
+		android:id="@+id/sv"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/bar">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:layout_marginTop="10dp"
+				android:background="@color/systemWhite"
+				android:orientation="horizontal"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="省      市："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<RelativeLayout
+					android:id="@+id/rl1"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<TextView
+						android:id="@+id/tv_city"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_alignParentLeft="true"
+						android:layout_toLeftOf="@+id/iv1"
+						android:gravity="center_vertical"
+						android:text="请选择省份和城市"
+						android:textColor="#888"
+						android:textColorHint="#888"
+						android:textSize="14sp" />
+
+					<ImageView
+						android:id="@+id/iv1"
+						android:layout_width="8dp"
+						android:layout_height="12dp"
+						android:layout_alignParentRight="true"
+						android:layout_centerVertical="true"
+						android:layout_marginLeft="15dp"
+						android:background="@drawable/icon_right" />
+				</RelativeLayout>
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="#f2f2f2" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:background="@color/systemWhite"
+				android:orientation="horizontal"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="详细地址："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<EditText
+					android:id="@+id/et_addr"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:background="@null"
+					android:ellipsize="end"
+					android:hint="请输入详细地址"
+					android:singleLine="true"
+					android:textColor="#555"
+					android:textColorHint="#888"
+					android:textSize="14sp" />
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="#f2f2f2" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:background="@color/systemWhite"
+				android:orientation="horizontal"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="车位类型："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<RelativeLayout
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_weight="1">
+
+						<RadioGroup
+							android:id="@+id/rg"
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:layout_centerVertical="true"
+							android:layout_marginTop="19dp"
+							android:orientation="horizontal">
+
+							<RadioButton
+								android:id="@+id/rbMale"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:checked="true"
+								android:text="室内"
+								android:textColor="#555"
+								android:textSize="14sp" />
+
+							<RadioButton
+								android:id="@+id/rbFemale"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginLeft="15dp"
+								android:text="室外"
+								android:textColor="#555"
+								android:textSize="14sp" />
+						</RadioGroup>
+
+					</RelativeLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="#f2f2f2" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:background="@color/systemWhite"
+				android:orientation="horizontal"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="车位编号："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<EditText
+						android:id="@+id/et_number"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_centerVertical="true"
+						android:background="@null"
+						android:ellipsize="end"
+						android:hint="请输入车位编号"
+						android:singleLine="true"
+						android:textColor="#555"
+						android:textColorHint="#888"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="#f2f2f2" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:background="@color/systemWhite"
+				android:orientation="horizontal"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="价       格："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<EditText
+						android:id="@+id/et_price"
+						android:layout_width="85dp"
+						android:layout_height="match_parent"
+						android:layout_centerVertical="true"
+						android:background="@null"
+						android:ellipsize="end"
+						android:hint="请输入价格"
+						android:inputType="number"
+						android:singleLine="true"
+						android:textColor="#555"
+						android:textColorHint="#888"
+						android:textSize="14sp" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_centerVertical="true"
+						android:layout_marginLeft="20dp"
+						android:text="元/小时"
+						android:textColor="@color/systemColor"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+
+				</LinearLayout>
+
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:background="#f2f2f2" />
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="#f2f2f2" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/systemWhite"
+				android:orientation="vertical"
+				android:padding="15dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:text="添加图片(选填)："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="50dp"
+					android:layout_marginTop="10dp">
+
+					<GridView
+						android:id="@+id/gv"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:columnWidth="50dp"
+						android:gravity="center"
+						android:horizontalSpacing="10dp"
+						android:listSelector="@android:color/transparent"
+						android:numColumns="5"
+						android:scrollbars="none"
+						android:stretchMode="columnWidth" />
+				</LinearLayout>
+
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:layout_marginTop="15dp"
+					android:text="拍摄包含停车位信息、车场或小区大门等(1~4张)"
+					android:textColor="#888"
+					android:textSize="11sp" />
+
+			</LinearLayout>
+
+			<!--时段-->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:layout_marginTop="10dp"
+				android:background="@color/systemWhite"
+				android:orientation="horizontal"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="共享日期："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<LinearLayout
+					android:id="@+id/ll_date"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<TextView
+						android:id="@+id/tv_date"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:hint="请选择日期"
+						android:textColor="#555"
+						android:textColorHint="#888"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:background="#f2f2f2" />
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="#f2f2f2" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:background="@color/systemWhite"
+				android:orientation="horizontal"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="共享时段："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<LinearLayout
+					android:id="@+id/ll_time"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<TextView
+						android:id="@+id/tv_time"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:hint="请选择共享时段"
+						android:textColor="#555"
+						android:textColorHint="#888"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+
+			<!--联系信息-->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:layout_marginTop="10dp"
+				android:background="@color/systemWhite"
+				android:orientation="horizontal"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="联系人："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<EditText
+						android:id="@+id/et_name"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_centerVertical="true"
+						android:background="@null"
+						android:ellipsize="end"
+						android:hint="请输入联系人称呼"
+						android:singleLine="true"
+						android:textColor="#555"
+						android:textColorHint="#888"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:background="#f2f2f2" />
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="#f2f2f2" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:background="@color/systemWhite"
+				android:orientation="horizontal"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="联系电话："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<EditText
+						android:id="@+id/et_phone"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_centerVertical="true"
+						android:background="@null"
+						android:ellipsize="end"
+						android:hint="请输入电话"
+						android:inputType="phone"
+						android:singleLine="true"
+						android:textColor="#555"
+						android:textColorHint="#888"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:background="@color/systemWhite"
+				android:orientation="vertical"
+				android:paddingLeft="15dp"
+				android:paddingRight="15dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="45dp"
+					android:layout_centerVertical="true"
+					android:gravity="center_vertical"
+					android:text="备注（选填）："
+					android:textColor="#333"
+					android:textSize="14sp" />
+
+				<EditText
+					android:id="@+id/et_description"
+					android:layout_width="match_parent"
+					android:layout_height="70dp"
+					android:background="@null"
+					android:ellipsize="end"
+					android:gravity="start"
+					android:hint="补充详细描述或其他备注信息"
+					android:textColor="#555"
+					android:textColorHint="#888"
+					android:textSize="14sp" />
+
+			</LinearLayout>
+
+			<Button
+				android:id="@+id/btn_submit"
+				android:layout_width="match_parent"
+				android:layout_height="42dp"
+				android:layout_marginLeft="20dp"
+				android:layout_marginTop="30dp"
+				android:layout_marginRight="20dp"
+				android:layout_marginBottom="40dp"
+				android:background="@drawable/button_bg"
+				android:shadowRadius="5.0"
+				android:text="发  布"
+				android:textColor="@color/systemWhite"
+				android:textSize="18sp"
+				android:textStyle="bold" />
+
+		</LinearLayout>
+	</ScrollView>
+
+	<LinearLayout
+		android:id="@+id/ll_load"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:orientation="vertical"
+		android:visibility="gone">
+
+		<com.wang.avi.AVLoadingIndicatorView
+			android:layout_width="25dp"
+			android:layout_height="25dp"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="10dp"
+			app:indicatorColor="@color/systemColor"
+			app:indicatorName="BallSpinFadeLoaderIndicator" />
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:text="正在请求..."
+			android:textColor="#333"
+			android:textSize="12sp" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/ll_success"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="250dp"
+		android:visibility="gone"
+		android:orientation="vertical">
+
+		<ImageView
+			android:layout_width="70dp"
+			android:layout_height="70dp"
+			android:background="@drawable/icon_success"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:text="发布成功！"
+			android:textStyle="bold"
+			android:textColor="#555"
+			android:textSize="15sp" />
+
+	</LinearLayout>
+
+
+</RelativeLayout>

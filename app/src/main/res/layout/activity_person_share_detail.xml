@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#fafafa"
+	android:orientation="vertical"
+	tools:context=".activity.ParkInfoDetailActivity">
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/ll_bottom">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="230dp">
+
+				<com.youth.banner.Banner
+					android:id="@+id/banner"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					app:image_scale_type="center_crop"
+					android:background="@drawable/no_pic"
+					app:indicator_height="8dp"
+					app:indicator_margin="5dp"
+					app:indicator_width="8dp" />
+
+				<RelativeLayout
+					android:id="@+id/rl_back"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:layout_marginLeft="15dp"
+					android:layout_marginTop="30dp"
+					android:background="@drawable/back_bg">
+
+					<ImageView
+						android:layout_width="10dp"
+						android:layout_height="17dp"
+						android:layout_centerInParent="true"
+						android:background="@drawable/icon_back_white" />
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/rl_collect"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:layout_alignParentRight="true"
+					android:layout_marginTop="30dp"
+					android:layout_marginRight="15dp"
+					android:background="@drawable/back_bg">
+
+					<ImageView
+						android:layout_width="17dp"
+						android:layout_height="17dp"
+						android:layout_centerInParent="true"
+						android:background="@drawable/icon_collect_white" />
+				</RelativeLayout>
+
+			</RelativeLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="#fff"
+				android:orientation="vertical"
+				android:paddingLeft="15dp"
+				android:paddingTop="20dp"
+				android:paddingRight="15dp"
+				android:paddingBottom="20dp">
+
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<TextView
+						android:id="@+id/tv_username"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="XXX"
+						android:textColor="#222"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="10dp"
+						android:layout_toRightOf="@+id/tv_username"
+						android:text="共享的车位"
+						android:textColor="#222"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+
+					<RelativeLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="15dp"
+						android:layout_toRightOf="@+id/tv"
+						android:background="@drawable/green_border"
+						android:padding="3dp"
+						android:paddingLeft="5dp"
+						android:paddingRight="5dp">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="共享车位"
+							android:textSize="10sp" />
+
+					</RelativeLayout>
+
+				</RelativeLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:gravity="center_vertical">
+
+					<ImageView
+						android:layout_width="20dp"
+						android:layout_height="20dp"
+						android:background="@drawable/icon_addr" />
+
+					<TextView
+						android:id="@+id/tv_address"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="5dp"
+						android:text="白杨街道浙江理工大学下沙校区"
+						android:textColor="#666"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="12dp"
+				android:background="#fff"
+				android:orientation="vertical"
+				android:paddingTop="20dp"
+				android:paddingBottom="5dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="15dp"
+					android:layout_marginBottom="15dp"
+					android:text="车位信息"
+					android:textColor="#222"
+					android:textSize="16sp"
+					android:textStyle="bold" />
+
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="1px"
+					android:background="#22000000" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:orientation="horizontal"
+					android:paddingLeft="15dp"
+					android:paddingRight="15dp">
+
+					<TextView
+						android:layout_width="100dp"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="共享时段："
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+					<TextView
+						android:id="@+id/tv_day"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="2020-03-20"
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+					<TextView
+						android:id="@+id/tv_startTime"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_marginLeft="20dp"
+						android:gravity="center_vertical"
+						android:text="8:30"
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_marginLeft="5dp"
+						android:layout_marginRight="5dp"
+						android:gravity="center_vertical"
+						android:text="~"
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+					<TextView
+						android:id="@+id/tv_endTime"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="12:00"
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:orientation="horizontal"
+					android:paddingLeft="15dp"
+					android:paddingRight="15dp">
+
+					<TextView
+						android:layout_width="100dp"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="价格："
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+					<TextView
+						android:id="@+id/tv_price"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="15"
+						android:textColor="@color/systemColor"
+						android:textSize="14sp" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_marginLeft="5dp"
+						android:gravity="center_vertical"
+						android:text="元/小时"
+						android:textColor="@color/systemColor"
+						android:textSize="13sp" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:orientation="horizontal"
+					android:paddingLeft="15dp"
+					android:paddingRight="15dp">
+
+					<TextView
+						android:layout_width="100dp"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="车位编号："
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+					<TextView
+						android:id="@+id/tv_number"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="PC12138"
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:orientation="horizontal"
+					android:paddingLeft="15dp"
+					android:paddingRight="15dp">
+
+					<TextView
+						android:layout_width="100dp"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="车位类型："
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+					<TextView
+						android:id="@+id/tv_type"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="室内"
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="12dp"
+				android:background="#fff"
+				android:orientation="vertical"
+				android:paddingTop="20dp"
+				android:paddingBottom="5dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="15dp"
+					android:layout_marginBottom="15dp"
+					android:text="联系人信息"
+					android:textColor="#222"
+					android:textSize="16sp"
+					android:textStyle="bold" />
+
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="1px"
+					android:background="#22000000" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:orientation="horizontal"
+					android:paddingLeft="15dp"
+					android:paddingRight="15dp">
+
+					<TextView
+						android:id="@+id/tv_contact"
+						android:layout_width="100dp"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="联系人："
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="小明"
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:orientation="horizontal"
+					android:paddingLeft="15dp"
+					android:paddingRight="15dp">
+
+					<TextView
+						android:layout_width="100dp"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="联系电话："
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+					<TextView
+						android:id="@+id/tv_phone"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:text="15988828324"
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="12dp"
+				android:layout_marginBottom="30dp"
+				android:background="#fff"
+				android:orientation="vertical"
+				android:paddingTop="20dp"
+				android:paddingBottom="5dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="15dp"
+					android:layout_marginBottom="15dp"
+					android:text="备注信息"
+					android:textColor="#222"
+					android:textSize="16sp"
+					android:textStyle="bold" />
+
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="1px"
+					android:background="#22000000" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:orientation="horizontal"
+					android:paddingLeft="15dp"
+					android:paddingRight="15dp">
+
+					<TextView
+						android:id="@+id/tv_beizhu"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:lines="5"
+						android:text="这里是备注信息"
+						android:textColor="#333"
+						android:textSize="14sp" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+	<LinearLayout
+		android:id="@+id/ll_bottom"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:orientation="vertical">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="#22000000" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_alignParentBottom="true"
+			android:background="@color/systemWhite"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:id="@+id/ll_daohang"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:gravity="center">
+
+				<ImageView
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:background="@drawable/icon_daohang" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="15dp"
+					android:text="去这里"
+					android:textColor="#111"
+					android:textSize="14sp" />
+			</LinearLayout>
+
+			<View
+				android:layout_width="1dp"
+				android:layout_height="match_parent"
+				android:layout_marginLeft="10dp"
+				android:layout_marginTop="10dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginBottom="10dp"
+				android:background="#22000000" />
+
+			<LinearLayout
+				android:id="@+id/ll_yuding"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:gravity="center">
+
+				<ImageView
+					android:layout_width="22dp"
+					android:layout_height="22dp"
+					android:background="@drawable/icon_yuding" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="15dp"
+					android:text="预订"
+					android:textColor="#111"
+					android:textSize="14sp" />
+			</LinearLayout>
+		</LinearLayout>
+
+	</LinearLayout>
+
+
+</RelativeLayout>
