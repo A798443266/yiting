@@ -3,12 +3,16 @@ package com.example.yiting.activity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -173,6 +177,30 @@ public class MainActivity extends FragmentActivity {
         tvPark.setTextColor(UIUtils.getColor(R.color.navGray));
         tvOrder.setTextColor(UIUtils.getColor(R.color.navGray));
         tvMe.setTextColor(UIUtils.getColor(R.color.navGray));
+    }
+
+    //连按两次退出
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == WHAT_BACK) {
+                flag = true;
+            }
+        }
+    };
+    private boolean flag = true;
+    private static final int WHAT_BACK = 0;
+
+    //连续点击两次返回键退出
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && flag) {
+            Toast.makeText(MainActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            flag = false;
+            handler.sendEmptyMessageDelayed(WHAT_BACK, 2000);
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 
     @Override

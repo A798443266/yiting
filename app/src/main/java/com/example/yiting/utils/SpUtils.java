@@ -31,4 +31,12 @@ public class SpUtils {
     public static boolean getBoolean(Context context, String key) {
         return context.getSharedPreferences(Constant.SP_NAME, Context.MODE_PRIVATE).getBoolean(key, false);
     }
+
+    public static void clear(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(Constant.SP_NAME, Context.MODE_PRIVATE);
+        sp.edit().clear().commit();
+
+    }
+
+
 }

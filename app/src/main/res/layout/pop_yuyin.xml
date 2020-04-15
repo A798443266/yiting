@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    xmlns:voiceView="http://schemas.android.com/apk/res-auto"
+    android:background="@color/systemWhite">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/icon_cha_gray"/>
+    
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="正在倾听"
+        android:textSize="16sp"
+        android:textColor="#333"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="请说出你想找的内容"
+        android:textSize="14sp"
+        android:textColor="#333"/>
+
+    <ImageView
+        android:id="@+id/iv_yuyin"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv1"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/icon_yuyin"/>
+
+    <com.carlos.voiceline.mylibrary.VoiceLineView
+        android:id="@+id/voicLine"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/tv1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        voiceView:fineness="three"
+        voiceView:lineSpeed="60"
+        voiceView:maxVolume="60"
+        voiceView:middleLine="@android:color/holo_blue_bright"
+        voiceView:middleLineHeight="1dp"
+        voiceView:rectSpace="2dp"
+        voiceView:rectWidth="5dp"
+        voiceView:sensibility="four"
+        voiceView:viewMode="line"
+        voiceView:voiceLine="@color/systemColor" />
+
+</RelativeLayout>

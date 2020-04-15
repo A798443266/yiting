@@ -1,5 +1,6 @@
 package com.example.yiting.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.example.yiting.R;
+import com.example.yiting.parkadmin.activity.MainAdminActivity;
 import com.example.yiting.utils.Constant;
 import com.example.yiting.utils.SpUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -56,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.rb1) {
+                if (checkedId == R.id.rb1) {
                     isUser = true;
                 } else {
                     isUser = false;
@@ -109,39 +111,50 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         String json = JSONObject.toJSONString(object);
+        String url = isUser ? Constant.LOGIN : Constant.PARK_ADMIN_LOGIN;
 
         llLoad.setVisibility(View.VISIBLE);
-        OkHttpUtils.postString().url(Constant.LOGIN)
-            .mediaType(MediaType.parse("application/json; charset=utf-8"))
-            .content(json)
-            .build()
-            .execute(new StringCallback() {
-                @Override
-                public void onError(Call call, Exception e, int id) {
-                    llLoad.setVisibility(View.GONE);
-                    Log.e("TAG", e.getMessage());
-                    Toast.makeText(LoginActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onResponse(String response, int id) {
-                    llLoad.setVisibility(View.GONE);
-                    JSONObject jsonObject = JSON.parseObject(response);
-                    int code = jsonObject.getInteger("code");
-                    if (code == 200) {
-                        int userId = jsonObject.getInteger("userId");
-                        String name = jsonObject.getString("name");
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        SpUtils.putBoolean(LoginActivity.this, Constant.ISLOGIN, true);
-                        SpUtils.putString(LoginActivity.this, Constant.USERNAME, name);
-                        SpUtils.putInt(LoginActivity.this, Constant.USERID, userId);
+        OkHttpUtils.postString().url(url)
+                .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                .content(json)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
                         llLoad.setVisibility(View.GONE);
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this, jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", e.getMessage());
+                        Toast.makeText(LoginActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
                     }
-                }
-            });
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        llLoad.setVisibility(View.GONE);
+                        JSONObject jsonObject = JSON.parseObject(response);
+                        int code = jsonObject.getInteger("code");
+                        if (code == 200) {
+                            int userId = jsonObject.getInteger("userId");
+                            String name = jsonObject.getString("name");
+                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+
+                            SpUtils.putBoolean(LoginActivity.this, Constant.ISLOGIN, true);
+                            SpUtils.putString(LoginActivity.this, Constant.USERNAME, name);
+                            SpUtils.putInt(LoginActivity.this, Constant.USERID, userId);
+                            llLoad.setVisibility(View.GONE);
+                            if (isUser) {
+                                SpUtils.putBoolean(LoginActivity.this, Constant.ISADMIN, false);
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            } else {
+                                int parkingLotId = jsonObject.getInteger("parkingLotId");
+                                SpUtils.putBoolean(LoginActivity.this, Constant.ISADMIN, true);
+                                SpUtils.putInt(LoginActivity.this, Constant.PARINK_LOT_ID, parkingLotId);
+                                startActivity(new Intent(LoginActivity.this, MainAdminActivity.class));
+                            }
+                            finish();
+
+                        } else {
+                            Toast.makeText(LoginActivity.this, jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

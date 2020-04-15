@@ -7,4 +7,16 @@
     <color name="systemColor">#fb3b5e</color>
     <color name="systemWhite">#fff</color>
     <color name="navGray">#515151</color>
+
+
+<!--    车牌自定义键盘的颜色-->
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorKeyboardBlue">#fb3b5e</color>
+    <color name="colorMainBlue">#fb3b5e</color>
+    <color name="colorKeyboardGray">#CCCCCC</color>
+    <color name="colorCodeGray">#111</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorKeyboardBg">#CCD0D7</color>
+<!--    城市简称字母 A B C等-->
+    <color name="colorShortName">#1a9cf8</color>
 </resources>

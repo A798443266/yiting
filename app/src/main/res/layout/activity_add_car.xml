@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/systemWhite"
+    tools:context=".activity.AddCarActivity">
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/title_bar" />
+
+    <RelativeLayout
+        android:id="@+id/rl_warn"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@+id/title_bar"
+        android:background="#fdf0f1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="注：请填写本人真实车牌信息，否则将承担法律责任"
+            android:textColor="#e93a40"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_warn"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="选择您的车牌类型"
+            android:textColor="#555"
+            android:textSize="15sp" />
+
+        <com.flyco.tablayout.CommonTabLayout
+            android:id="@+id/ct"
+            android:layout_width="200dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            app:tl_tab_space_equal="true"
+            app:tl_textSelectColor="#fff"
+            app:tl_textUnselectColor="#555"
+            app:tl_textBold="SELECT"
+            app:tl_indicator_color="#1a9cf8"
+            app:tl_indicator_bounce_enable="false"
+            app:tl_indicator_anim_enable="true"
+            app:tl_indicator_style="BLOCK"
+            app:tl_textsize="15sp"
+            app:tl_divider_padding="0dp"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/license_container"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_alignParentBottom="true">
+
+        <com.example.yiting.view.LicensePlateView
+            android:id="@+id/license"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginRight="28dp"/>
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="220dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/license"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_enable_bg"
+            android:layout_centerHorizontal="true"
+            android:text="确  认"
+            android:textColor="@color/systemWhite"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

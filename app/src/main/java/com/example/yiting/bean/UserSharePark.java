@@ -35,11 +35,13 @@ public class UserSharePark implements Serializable {
 
     private String passtime;
 
-    private Double price;
+    private Float price;
 
     private String day;
 
     private String starttime;
+
+    private String submittime;
 
     private String endtime;
 
@@ -54,7 +56,7 @@ public class UserSharePark implements Serializable {
     public UserSharePark() {
     }
 
-    public UserSharePark(Integer id, Integer userid, Double longitude, Double latitude, String address, String pic, String description, String plot, String parklotid, String number, Integer size, String phone, String name, String passtime, Double price, String day, String starttime, String endtime, String province, String city, Integer review, Integer type) {
+    public UserSharePark(Integer id, Integer userid, Double longitude, Double latitude, String address, String pic, String description, String plot, String parklotid, String number, Integer size, String phone, String name, String submittime, String passtime, Float price, String day, String starttime, String endtime, String province, String city, Integer review, Integer type) {
         this.id = id;
         this.userid = userid;
         this.longitude = longitude;
@@ -68,6 +70,7 @@ public class UserSharePark implements Serializable {
         this.size = size;
         this.phone = phone;
         this.name = name;
+        this.submittime = submittime;
         this.passtime = passtime;
         this.price = price;
         this.day = day;
@@ -77,6 +80,14 @@ public class UserSharePark implements Serializable {
         this.city = city;
         this.review = review;
         this.type = type;
+    }
+
+    public String getSubmittime() {
+        return submittime;
+    }
+
+    public void setSubmittime(String submittime) {
+        this.submittime = submittime;
     }
 
     public Integer getId() {
@@ -191,11 +202,11 @@ public class UserSharePark implements Serializable {
         this.passtime = passtime;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

@@ -25,7 +25,7 @@ public class SearchSugAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return this.context == null ? 0 : this.infos.size();
+        return this.infos == null ? 0 : this.infos.size();
     }
 
     @Override

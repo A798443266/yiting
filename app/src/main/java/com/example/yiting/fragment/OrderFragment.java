@@ -25,20 +25,21 @@ public class OrderFragment extends BaseFragment {
     private OrderFragment2 fragment2;
     private OrderFragment3 fragment3;
     private ArrayList<Fragment> fragments;
-    private String[] titles = new String[]{"全部订单", "预约订单", "发布订单"};
+    private String[] titles = new String[]{"共享车位订单", "停车场订单"};
 
     @Override
     protected void initView() {
         fragments = new ArrayList<>();
         fragment1 = new OrderFragment1();
         fragment2 = new OrderFragment2();
-        fragment3 = new OrderFragment3();
+//        fragment3 = new OrderFragment3();
         fragments.add(fragment1);
         fragments.add(fragment2);
-        fragments.add(fragment3);
+//        fragments.add(fragment3);
 
         vp.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         tabLayout.setViewPager(vp);
+        tabLayout.setCurrentTab(0);
     }
 
     @Override

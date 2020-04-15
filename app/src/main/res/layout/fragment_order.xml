@@ -37,6 +37,11 @@
 		app:tl_textUnselectColor="#888"
 		app:tl_textsize="15sp" />
 
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1px"
+		android:background="#33000000"/>
+
 	<androidx.viewpager.widget.ViewPager
 		android:id="@+id/vp"
 		android:layout_width="match_parent"

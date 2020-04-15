@@ -34,6 +34,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.geocode.GeoCodeOption;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
@@ -196,13 +197,13 @@ public class ReleaseParkActivity extends AppCompatActivity {
                 tvDate.setText(day);
             }
         })
-            .setContentTextSize(20)
-            .setTitleText("选择日期")
-            .setTitleColor(0xaa000000)//标题文字颜色
-            .setSubmitColor(UIUtils.getColor(R.color.systemColor))//确定按钮文字颜色
-            .setCancelColor(0x88000000)//取消按钮文字颜色
-            .setRangDate(startDate, endDate)//起始终止年月日设定
-            .build();
+                .setContentTextSize(20)
+                .setTitleText("选择日期")
+                .setTitleColor(0xaa000000)//标题文字颜色
+                .setSubmitColor(UIUtils.getColor(R.color.systemColor))//确定按钮文字颜色
+                .setCancelColor(0x88000000)//取消按钮文字颜色
+                .setRangDate(startDate, endDate)//起始终止年月日设定
+                .build();
 
         pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
@@ -212,13 +213,13 @@ public class ReleaseParkActivity extends AppCompatActivity {
                 tvTime.setText(startTime + " ~ " + endTime);
             }
         })
-            .setContentTextSize(20)
-            .setTitleText("选择共享时段")
-            .setTitleColor(0xaa000000)//标题文字颜色
-            .setSubmitColor(UIUtils.getColor(R.color.systemColor))//确定按钮文字颜色
-            .setCancelColor(0x88000000)//取消按钮文字颜色
-            .setSelectOptions(16, 24)
-            .build();
+                .setContentTextSize(20)
+                .setTitleText("选择共享时段")
+                .setTitleColor(0xaa000000)//标题文字颜色
+                .setSubmitColor(UIUtils.getColor(R.color.systemColor))//确定按钮文字颜色
+                .setCancelColor(0x88000000)//取消按钮文字颜色
+                .setSelectOptions(16, 24)
+                .build();
         pvOptions.setNPicker(startTimeArr, endTimeArr, null);
 
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -234,21 +235,21 @@ public class ReleaseParkActivity extends AppCompatActivity {
 
 
         pop = new EasyPopup(this)
-            .setContentView(view)
-            .setWidth(ViewGroup.LayoutParams.MATCH_PARENT)
-            .setHeight(UIUtils.dp2px(159))
-            .setBackgroundDimEnable(true)
-            .setAnimationStyle(R.style.pop_park_info_animation)
-            .setDimValue(0.2f)
-            .setFocusAndOutsideEnable(true)
-            .apply();
+                .setContentView(view)
+                .setWidth(ViewGroup.LayoutParams.MATCH_PARENT)
+                .setHeight(UIUtils.dp2px(159))
+                .setBackgroundDimEnable(true)
+                .setAnimationStyle(R.style.pop_park_info_animation)
+                .setDimValue(0.2f)
+                .setFocusAndOutsideEnable(true)
+                .apply();
 
         //拍照
         pop.findViewById(R.id.ll1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(ReleaseParkActivity.this,
-                    Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(ReleaseParkActivity.this, new String[]{Manifest.permission.CAMERA}, 102);
                 } else {
                     takePhoto();
@@ -263,7 +264,7 @@ public class ReleaseParkActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //动态申请获取访问 读写磁盘的权限
                 if (ContextCompat.checkSelfPermission(ReleaseParkActivity.this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(ReleaseParkActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
                 } else {
                     takeAlbum();
@@ -284,7 +285,7 @@ public class ReleaseParkActivity extends AppCompatActivity {
 
     public void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File file = new File(getExternalCacheDir(), "test.jpg");
+        File file = new File(getExternalCacheDir(), System.currentTimeMillis() + ".jpg");
         try {
             if (file.exists()) {
                 file.delete();
@@ -415,12 +416,12 @@ public class ReleaseParkActivity extends AppCompatActivity {
                 tvCity.setText(province + " / " + city);
             }
         })
-            .setContentTextSize(20)
-            .setTitleText("选择省份和城市")
-            .setTitleColor(0xaa000000)
-            .setSubmitColor(UIUtils.getColor(R.color.systemColor))
-            .setCancelColor(0x88000000)
-            .build();
+                .setContentTextSize(20)
+                .setTitleText("选择省份和城市")
+                .setTitleColor(0xaa000000)
+                .setSubmitColor(UIUtils.getColor(R.color.systemColor))
+                .setCancelColor(0x88000000)
+                .build();
         pvCity.setPicker(options1Items, options2Items);
         pvCity.show();
     }
@@ -439,28 +440,26 @@ public class ReleaseParkActivity extends AppCompatActivity {
 
 
         if (TextUtils.isEmpty(address) || TextUtils.isEmpty(number)
-            || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone)
-            || TextUtils.isEmpty(price) || TextUtils.isEmpty(province)
-            || TextUtils.isEmpty(city) || TextUtils.isEmpty(day)
-            || TextUtils.isEmpty(startTime) || TextUtils.isEmpty(endTime)) {
+                || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone)
+                || TextUtils.isEmpty(price) || TextUtils.isEmpty(province)
+                || TextUtils.isEmpty(city) || TextUtils.isEmpty(day)
+                || TextUtils.isEmpty(startTime) || TextUtils.isEmpty(endTime)) {
 
             Toast.makeText(this, "输入信息不完整", Toast.LENGTH_SHORT).show();
             return;
         }
 
         mCoder.geocode(new GeoCodeOption()
-            .city(city)
-            .address(address));
+                .city(city)
+                .address(address));
 
     }
 
     public void submit(double latitude, double longitude) {
-        Log.e("TAG", latitude + ", " + longitude);
         Map<String, String> headers = new HashMap<>();
         Map<String, String> params = new HashMap<>();
         Map<String, File> files = new HashMap<>();
         if (add.size() > 0) {
-            Log.e("TAG",add.size()+"");
             headers.put("Content-Type", "mutipart/form-data");
             for (int i = 0; i < add.size(); i++) {
                 File file = new File(add.get(i));
@@ -483,8 +482,8 @@ public class ReleaseParkActivity extends AppCompatActivity {
         params.put("longitude", longitude + "");
         params.put("userId", userId + "");
         params.put("day", day);
-        params.put("startTime",startTime);
-        params.put("endTime",endTime);
+        params.put("startTime", startTime);
+        params.put("endTime", endTime);
 
         if (!TextUtils.isEmpty(description)) {
             params.put("description", description);
@@ -493,26 +492,31 @@ public class ReleaseParkActivity extends AppCompatActivity {
         llLoad.setVisibility(View.VISIBLE);
 
         OkHttpUtils.post().url(Constant.ADD_SHARE)
-            .headers(headers)
-            .params(params)
-            .files("pics", files)
-            .build()
-            .execute(new StringCallback() {
-                @Override
-                public void onError(Call call, Exception e, int id) {
-                    llLoad.setVisibility(View.GONE);
-                    Toast.makeText(ReleaseParkActivity.this, "网络出错啦~", Toast.LENGTH_SHORT).show();
-                    Log.e("TAG", e.getMessage());
-                }
+                .headers(headers)
+                .params(params)
+                .files("pics", files)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        llLoad.setVisibility(View.GONE);
+                        Toast.makeText(ReleaseParkActivity.this, "网络出错啦~", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", e.getMessage());
+                    }
 
-                @Override
-                public void onResponse(String response, int id) {
-//                    llLoad.setVisibility(View.GONE);
-//                    sv.setVisibility(View.GONE);
-//                    llSuccess.setVisibility(View.VISIBLE);
-                    Log.e("TAG", response);
-                }
-            });
+                    @Override
+                    public void onResponse(String response, int id) {
+                        JSONObject jsonObject = JSON.parseObject(response);
+                        int code = jsonObject.getInteger("code");
+                        if (code != 200) {
+                            Toast.makeText(ReleaseParkActivity.this, "网络出错啦~", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        llLoad.setVisibility(View.GONE);
+                        sv.setVisibility(View.GONE);
+                        llSuccess.setVisibility(View.VISIBLE);
+                    }
+                });
     }
 
     OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {

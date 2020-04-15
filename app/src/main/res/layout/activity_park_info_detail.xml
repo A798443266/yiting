@@ -1,347 +1,394 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:background="#fafafa"
-	android:orientation="vertical"
-	tools:context=".activity.ParkInfoDetailActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fafafa"
+    tools:context=".activity.ParkInfoDetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_above="@+id/rl_bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="230dp">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/no_pic"
+                    app:image_scale_type="center_crop"
+                    app:indicator_height="8dp"
+                    app:indicator_margin="5dp"
+                    app:indicator_width="8dp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/back_bg">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="17dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/icon_back_white" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_collect"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/back_bg">
+
+                    <ImageView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/icon_collect_white" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="浙江理工大学停车场"
+                        android:textColor="#222"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/tv_name"
+                        android:background="@drawable/green_border"
+                        android:padding="3dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="停车场"
+                            android:textSize="10sp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/icon_addr" />
+
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="白杨街道浙江理工大学下沙校区"
+                        android:textColor="#666"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="车位信息"
+                    android:textColor="#222"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#22000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4 元"
+                            android:textColor="@color/systemColor"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="元 / 小时"
+                            android:textColor="#555"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_cur"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="56"
+                            android:textColor="@color/systemColor"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="剩余车位"
+                            android:textColor="#555"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_free"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="未知"
+                            android:textColor="@color/systemColor"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="免费时长"
+                            android:textColor="#555"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_cappedPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="未知"
+                            android:textColor="@color/systemColor"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="封顶价"
+                            android:textColor="#555"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="支付方式"
+                    android:textColor="#222"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#22000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/blue_border"
+                        android:padding="3dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="电子支付"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/blue_border"
+                        android:padding="3dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="现金支付"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="#fff"
+                android:orientation="vertical"
+				android:layout_marginBottom="30dp"
+                android:paddingTop="20dp"
+				android:paddingBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="车场描述"
+                    android:textColor="#222"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#22000000" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp"
+                    android:text="这里是车场描述"
+                    android:textColor="#666"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="230dp">
-
-		<com.youth.banner.Banner
-			android:id="@+id/banner"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			app:image_scale_type="center_crop"
-			android:background="@drawable/no_pic"
-			app:indicator_height="8dp"
-			app:indicator_margin="5dp"
-			app:indicator_width="8dp" />
-
-		<RelativeLayout
-			android:id="@+id/rl_back"
-			android:layout_width="30dp"
-			android:layout_height="30dp"
-			android:layout_marginLeft="15dp"
-			android:layout_marginTop="30dp"
-			android:background="@drawable/back_bg">
-
-			<ImageView
-				android:layout_width="10dp"
-				android:layout_height="17dp"
-				android:layout_centerInParent="true"
-				android:background="@drawable/icon_back_white" />
-		</RelativeLayout>
-
-		<RelativeLayout
-			android:id="@+id/rl_collect"
-			android:layout_width="30dp"
-			android:layout_height="30dp"
-			android:layout_alignParentRight="true"
-			android:layout_marginTop="30dp"
-			android:layout_marginRight="15dp"
-			android:background="@drawable/back_bg">
-
-			<ImageView
-				android:layout_width="17dp"
-				android:layout_height="17dp"
-				android:layout_centerInParent="true"
-				android:background="@drawable/icon_collect_white" />
-		</RelativeLayout>
-
-	</RelativeLayout>
-
-	<LinearLayout
+		android:id="@+id/rl_bottom"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="#fff"
-		android:orientation="vertical"
-		android:paddingLeft="15dp"
-		android:paddingTop="20dp"
-		android:paddingRight="15dp"
-		android:paddingBottom="20dp">
-
-		<RelativeLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
-
-			<TextView
-				android:id="@+id/tv_name"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:text="浙江理工大学停车场"
-				android:textColor="#222"
-				android:textSize="16sp"
-				android:textStyle="bold" />
-
-			<RelativeLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="15dp"
-				android:layout_toRightOf="@+id/tv_name"
-				android:background="@drawable/green_border"
-				android:padding="3dp"
-				android:paddingLeft="5dp"
-				android:paddingRight="5dp">
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="停车场"
-					android:textSize="10sp" />
-
-			</RelativeLayout>
-
-		</RelativeLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="10dp"
-			android:gravity="center_vertical">
-
-			<ImageView
-				android:layout_width="20dp"
-				android:layout_height="20dp"
-				android:background="@drawable/icon_addr" />
-
-			<TextView
-				android:id="@+id/tv_address"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="5dp"
-				android:text="白杨街道浙江理工大学下沙校区"
-				android:textColor="#666"
-				android:textSize="14sp" />
-
-
-		</LinearLayout>
-
-
-	</LinearLayout>
-
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="12dp"
-		android:background="#fff"
-		android:orientation="vertical"
-		android:paddingTop="20dp"
-		android:paddingBottom="20dp">
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="15dp"
-			android:layout_marginBottom="15dp"
-			android:text="车位信息"
-			android:textColor="#222"
-			android:textSize="16sp"
-			android:textStyle="bold" />
-
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1px"
-			android:background="#22000000" />
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="20dp"
-			android:layout_marginBottom="5dp">
-
-			<LinearLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:gravity="center"
-				android:orientation="vertical">
-
-				<TextView
-					android:id="@+id/tv_price"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="4 元"
-					android:textColor="@color/systemColor"
-					android:textSize="15sp"
-					android:textStyle="bold" />
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="8dp"
-					android:text="元 / 小时"
-					android:textColor="#555"
-					android:textSize="12sp" />
-
-			</LinearLayout>
-
-			<LinearLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:gravity="center"
-				android:orientation="vertical">
-
-				<TextView
-					android:id="@+id/tv_cur"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="56"
-					android:textColor="@color/systemColor"
-					android:textSize="15sp"
-					android:textStyle="bold" />
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="8dp"
-					android:text="剩余车位"
-					android:textColor="#555"
-					android:textSize="12sp" />
-
-			</LinearLayout>
-
-			<LinearLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:gravity="center"
-				android:orientation="vertical">
-
-				<TextView
-					android:id="@+id/tv_free"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="未知"
-					android:textColor="@color/systemColor"
-					android:textSize="15sp"
-					android:textStyle="bold" />
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="8dp"
-					android:text="免费时长"
-					android:textColor="#555"
-					android:textSize="12sp" />
-
-			</LinearLayout>
-
-			<LinearLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:gravity="center"
-				android:orientation="vertical">
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="未知"
-					android:textColor="@color/systemColor"
-					android:textSize="15sp"
-					android:textStyle="bold" />
-
-				<TextView
-					android:id="@+id/tv_cappedPrice"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="8dp"
-					android:text="封顶价"
-					android:textColor="#555"
-					android:textSize="14sp" />
-
-			</LinearLayout>
-		</LinearLayout>
-
-	</LinearLayout>
-
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="12dp"
-		android:background="#fff"
-		android:orientation="vertical"
-		android:paddingTop="20dp"
-		android:paddingBottom="20dp">
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="15dp"
-			android:layout_marginBottom="15dp"
-			android:text="支付方式"
-			android:textColor="#222"
-			android:textSize="16sp"
-			android:textStyle="bold" />
-
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1px"
-			android:background="#22000000" />
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="15dp">
-
-			<RelativeLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="15dp"
-				android:background="@drawable/blue_border"
-				android:padding="3dp"
-				android:paddingLeft="5dp"
-				android:paddingRight="5dp">
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="电子支付"
-					android:textSize="12sp" />
-			</RelativeLayout>
-
-			<RelativeLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="15dp"
-				android:background="@drawable/blue_border"
-				android:padding="3dp"
-				android:paddingLeft="5dp"
-				android:paddingRight="5dp">
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="现金支付"
-					android:textSize="12sp" />
-			</RelativeLayout>
-		</LinearLayout>
-
-	</LinearLayout>
-
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_weight="1">
-
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:layout_above="@+id/ll_bottom"
-			android:background="#22000000" />
+		android:layout_alignParentBottom="true">
 
 		<LinearLayout
 			android:id="@+id/ll_bottom"
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
-			android:layout_alignParentBottom="true"
 			android:background="@color/systemWhite"
 			android:orientation="horizontal">
 
@@ -397,7 +444,11 @@
 			</LinearLayout>
 		</LinearLayout>
 
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="#22000000" />
+
 	</RelativeLayout>
 
-
-</LinearLayout>
+</RelativeLayout>

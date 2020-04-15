@@ -2,10 +2,12 @@ package com.example.yiting.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,6 +71,8 @@ public class ParkFragment extends BaseFragment {
     RelativeLayout root;
     @BindView(R.id.tv_address)
     TextView tvAddress;
+    @BindView(R.id.rg)
+    RadioGroup rg;
 
     private EasyPopup popShare;
     private EasyPopup popPark;
@@ -76,8 +80,13 @@ public class ParkFragment extends BaseFragment {
     private BaiduMap map;
     private LocationClient mLocationClient;
     private BDLocation currentLocation = null; //存放当前定位的位置信息
+    private LatLng currentCenter;//当前屏幕的中心点
+    private Boolean isLoad = false;
 
     private Marker curClickMark = null; //当前点击的Marker
+    private int showStatus = 1;
+    List<Marker> parkMarkers = new ArrayList<>();
+    List<Marker> shareMarkers = new ArrayList<>();
 
     @Override
     protected void initView() {
@@ -94,9 +103,10 @@ public class ParkFragment extends BaseFragment {
         if (child != null && (child instanceof ImageView || child instanceof ZoomControls)) {
             child.setVisibility(View.INVISIBLE);
         }
-        setMarkClick();
         initLocation();
+        setMarkClick();
         initPopView();
+        setRgChangeListener();
     }
 
     @Override
@@ -118,7 +128,7 @@ public class ParkFragment extends BaseFragment {
         mLocationClient.start();
     }
 
-    @OnClick({R.id.cv_lk, R.id.cv_position, R.id.cv_search})
+    @OnClick({R.id.cv_lk, R.id.cv_position, R.id.cv_search, R.id.cv_load})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cv_lk:
@@ -137,6 +147,12 @@ public class ParkFragment extends BaseFragment {
             case R.id.cv_search:
                 startActivity(new Intent(mContext, SearchActivity.class));
                 getActivity().overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+                break;
+            case R.id.cv_load:  //加载屏幕中心点附近的车位
+                if (currentCenter == null) return;
+                if (isLoad) return;  //防止短时间内重复点击
+                isLoad = true;
+                getAllShare(currentCenter.latitude, currentCenter.longitude);
                 break;
         }
     }
@@ -188,7 +204,7 @@ public class ParkFragment extends BaseFragment {
         }
     }
 
-    /*定位到当前位置位置*/
+    /*定位到当前位置*/
     private void navigateTo() {
         if (currentLocation == null)
             return;
@@ -222,7 +238,7 @@ public class ParkFragment extends BaseFragment {
 
         UserSharePark userSharePark = shareInfo.getUserSharePark();
         tv_name.setText(shareInfo.getUser().getName());
-        tv_address.setText(userSharePark.getProvince() + userSharePark.getCity() + userSharePark.getAddress());
+        tv_address.setText(userSharePark.getProvince() + userSharePark.getCity() + "市" + userSharePark.getAddress());
         tv_day.setText(userSharePark.getDay());
         tv_startTime.setText(userSharePark.getStarttime());
         tv_endtime.setText(userSharePark.getEndtime());
@@ -253,11 +269,11 @@ public class ParkFragment extends BaseFragment {
 
         TextView tv_name = popPark.findViewById(R.id.tv_name);
         TextView tv_address = popPark.findViewById(R.id.tv_address);
-//        TextView tv_cur = popPark.findViewById(R.id.tv_cur);
+        TextView tv_cur = popPark.findViewById(R.id.tv_cur);
 
         tv_name.setText(parkingLot.getName());
-//        tv_cur.setText(parkingLot.getCurrent() + "");
-        tv_address.setText(parkingLot.getProvince() + "省" + parkingLot.getCity() + "市" + parkingLot.getAddress());
+        tv_cur.setText(parkingLot.getCurrent() + "");
+        tv_address.setText(parkingLot.getProvince() + parkingLot.getCity() + "市" + parkingLot.getAddress());
 
         for (int i = 0; i < pop1Views.size(); i++) {
             pop1Views.get(i).setOnClickListener(new View.OnClickListener() {
@@ -275,15 +291,16 @@ public class ParkFragment extends BaseFragment {
     }
 
     public void initPopView() {
+
         View view = View.inflate(mContext, R.layout.pop_personal_share, null);
         popShare = new EasyPopup(mContext)
-            .setContentView(view)
-            .setWidth(UIUtils.dp2px(335))
-            .setBackgroundDimEnable(true)
-            .setAnimationStyle(R.style.pop_park_info_animation)
-            .setDimValue(0.2f)
-            .setFocusAndOutsideEnable(true)
-            .apply();
+                .setContentView(view)
+                .setWidth(UIUtils.dp2px(335))
+                .setBackgroundDimEnable(true)
+                .setAnimationStyle(R.style.pop_park_info_animation)
+                .setDimValue(0.2f)
+                .setFocusAndOutsideEnable(true)
+                .apply();
         popShare.findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -302,13 +319,13 @@ public class ParkFragment extends BaseFragment {
 
         View view1 = View.inflate(mContext, R.layout.pop_park_info, null);
         popPark = new EasyPopup(mContext)
-            .setContentView(view1)
-            .setWidth(UIUtils.dp2px(335))
-            .setBackgroundDimEnable(true)
-            .setAnimationStyle(R.style.pop_park_info_animation)
-            .setDimValue(0.2f)
-            .setFocusAndOutsideEnable(true)
-            .apply();
+                .setContentView(view1)
+                .setWidth(UIUtils.dp2px(335))
+                .setBackgroundDimEnable(true)
+                .setAnimationStyle(R.style.pop_park_info_animation)
+                .setDimValue(0.2f)
+                .setFocusAndOutsideEnable(true)
+                .apply();
 
         popPark.findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,48 +358,65 @@ public class ParkFragment extends BaseFragment {
     public void getAllShare(double latitude, double longitude) {
         Log.e("TAG", latitude + ", " + longitude);
         OkHttpUtils.get().url(Constant.GETALLSHARE)
-            .addParams("latitude", latitude + "")
-            .addParams("longitude", longitude + "")
-            .build()
-            .execute(new StringCallback() {
-                @Override
-                public void onError(Call call, Exception e, int id) {
-                    Toast.makeText(mContext, "网络出错了", Toast.LENGTH_SHORT).show();
-                }
+                .addParams("latitude", latitude + "")
+                .addParams("longitude", longitude + "")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        isLoad = false;
+                        Toast.makeText(mContext, "网络出错了", Toast.LENGTH_SHORT).show();
+                    }
 
-                @Override
-                public void onResponse(String response, int id) {
-                    JSONObject jsonObject = JSON.parseObject(response);
-                    String shareStr = jsonObject.getString("userShare");
-                    String parkStr = jsonObject.getString("parkingLot");
-                    //用户共享车位
-                    List<ShareInfo> shareInfos = JSON.parseArray(shareStr, ShareInfo.class);
-                    //停车场
-                    List<ParkingLot> parkingLots = JSON.parseArray(parkStr, ParkingLot.class);
-                    addShareMarker(shareInfos);
-                    addParkMarker(parkingLots);
-                }
-            });
+                    @Override
+                    public void onResponse(String response, int id) {
+                        JSONObject jsonObject = JSON.parseObject(response);
+                        String shareStr = jsonObject.getString("userShare");
+                        String parkStr = jsonObject.getString("parkingLot");
+                        shareMarkers.clear();
+                        parkMarkers.clear();
+                        if (TextUtils.isEmpty(shareStr) && TextUtils.isEmpty(parkStr)) {
+                            Toast.makeText(mContext, "当前附近没有找到任何停车位", Toast.LENGTH_SHORT).show();
+                            isLoad = false;
+                            return;
+                        }
+                        //清楚上一次的marker
+                        map.clear();
+                        //用户共享车位
+                        if (!TextUtils.isEmpty(shareStr)) {
+                            List<ShareInfo> shareInfos = JSON.parseArray(shareStr, ShareInfo.class);
+                            addShareMarker(shareInfos);
+                        }
+                        //停车场
+                        if (!TextUtils.isEmpty(parkStr)) {
+                            List<ParkingLot> parkingLots = JSON.parseArray(parkStr, ParkingLot.class);
+                            addParkMarker(parkingLots);
+                        }
+                        isLoad = false;
+
+                    }
+                });
     }
 
     public void addShareMarker(List<ShareInfo> shareInfos) {
         if (shareInfos == null || shareInfos.size() == 0) return;
         BitmapDescriptor bitmap = BitmapDescriptorFactory
-            .fromView(getActivity().getLayoutInflater().inflate(R.layout.icon_share, null));
+                .fromView(getActivity().getLayoutInflater().inflate(R.layout.icon_share, null));
         for (int i = 0; i < shareInfos.size(); i++) {
             ShareInfo shareInfo = shareInfos.get(i);
             LatLng point = new LatLng(shareInfo.getUserSharePark().getLatitude(),
-                shareInfo.getUserSharePark().getLongitude());
+                    shareInfo.getUserSharePark().getLongitude());
 
             Bundle bundle = new Bundle();
             bundle.putSerializable("info", shareInfo);
             OverlayOptions option = new MarkerOptions()
-                .position(point)
-                .extraInfo(bundle)
-                .animateType(MarkerOptions.MarkerAnimateType.jump)
-                .icon(bitmap);
+                    .position(point)
+                    .extraInfo(bundle)
+                    .animateType(MarkerOptions.MarkerAnimateType.jump)
+                    .icon(bitmap);
 
-            map.addOverlay(option);
+            Marker marker = (Marker) map.addOverlay(option);
+            shareMarkers.add(marker);
         }
 
     }
@@ -390,24 +424,112 @@ public class ParkFragment extends BaseFragment {
     public void addParkMarker(List<ParkingLot> parkingLots) {
         if (parkingLots == null || parkingLots.size() == 0) return;
         BitmapDescriptor bitmap = BitmapDescriptorFactory
-            .fromView(getActivity().getLayoutInflater().inflate(R.layout.icon_park, null));
+                .fromView(getActivity().getLayoutInflater().inflate(R.layout.icon_park, null));
         for (int i = 0; i < parkingLots.size(); i++) {
             ParkingLot parkingLot = parkingLots.get(i);
             LatLng point = new LatLng(parkingLot.getLatitude(),
-                parkingLot.getLongitude());
+                    parkingLot.getLongitude());
 
             Bundle bundle = new Bundle();
             bundle.putSerializable("info", parkingLot);
             OverlayOptions option = new MarkerOptions()
-                .position(point)
-                .extraInfo(bundle)
-                .animateType(MarkerOptions.MarkerAnimateType.jump)
-                .icon(bitmap);
+                    .position(point)
+                    .extraInfo(bundle)
+                    .animateType(MarkerOptions.MarkerAnimateType.jump)
+                    .icon(bitmap);
 
-            map.addOverlay(option);
+            Marker marker = (Marker) map.addOverlay(option);
+            parkMarkers.add(marker);
         }
 
     }
+
+    // 设置RadioButton改变监听，筛选显示
+    public void setRgChangeListener() {
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb1:
+                        if (showStatus == 1) return;
+                        if (showStatus == 2) {
+                            for (int i = 0; i < parkMarkers.size(); i++) {
+                                parkMarkers.get(i).setVisible(true);
+                                parkMarkers.get(i).setClickable(true);
+                            }
+                        } else {
+                            for (int i = 0; i < shareMarkers.size(); i++) {
+                                shareMarkers.get(i).setVisible(true);
+                                shareMarkers.get(i).setClickable(true);
+                            }
+                        }
+                        showStatus = 1;
+                        break;
+                    case R.id.rb2:
+                        if (showStatus == 2) return;
+                        if (showStatus == 1) {
+                            for (int i = 0; i < parkMarkers.size(); i++) {
+                                parkMarkers.get(i).setVisible(false);
+                                parkMarkers.get(i).setClickable(false);
+                            }
+                        } else {
+                            for (int i = 0; i < parkMarkers.size(); i++) {
+                                parkMarkers.get(i).setVisible(false);
+                                parkMarkers.get(i).setClickable(false);
+                            }
+                            for (int i = 0; i < shareMarkers.size(); i++) {
+                                shareMarkers.get(i).setVisible(true);
+                                shareMarkers.get(i).setClickable(true);
+                            }
+                        }
+                        showStatus = 2;
+                        break;
+                    case R.id.rb3:
+                        if (showStatus == 3) return;
+                        if (showStatus == 1) {
+                            for (int i = 0; i < shareMarkers.size(); i++) {
+                                shareMarkers.get(i).setVisible(false);
+                                shareMarkers.get(i).setClickable(false);
+                            }
+                        } else {
+                            for (int i = 0; i < shareMarkers.size(); i++) {
+                                shareMarkers.get(i).setVisible(false);
+                                shareMarkers.get(i).setClickable(false);
+                            }
+                            for (int i = 0; i < parkMarkers.size(); i++) {
+                                parkMarkers.get(i).setVisible(true);
+                                parkMarkers.get(i).setClickable(true);
+                            }
+                        }
+                        showStatus = 3;
+                        break;
+                }
+            }
+        });
+
+        map.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
+            @Override
+            public void onMapStatusChangeStart(MapStatus mapStatus) {
+
+            }
+
+            @Override
+            public void onMapStatusChangeStart(MapStatus mapStatus, int i) {
+
+            }
+
+            @Override
+            public void onMapStatusChange(MapStatus mapStatus) {
+
+            }
+
+            @Override
+            public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                currentCenter = mapStatus.target;
+            }
+        });
+    }
+
 
     @Override
     public void onResume() {
@@ -432,10 +554,8 @@ public class ParkFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (unbinder != null) {
-            unbinder.unbind();
-        }
-        mapView.onDestroy();
+        if (mapView != null)
+            mapView.onDestroy();
         map.setMyLocationEnabled(false);
         mLocationClient.stop();
         EventBus.getDefault().unregister(this);

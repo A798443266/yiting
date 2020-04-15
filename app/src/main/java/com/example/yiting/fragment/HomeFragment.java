@@ -4,8 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,22 +16,29 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.bumptech.glide.Glide;
 import com.example.yiting.R;
+import com.example.yiting.activity.AddCarActivity;
+import com.example.yiting.activity.InformationAllActivity;
+import com.example.yiting.activity.InformationDetailActivity;
 import com.example.yiting.activity.ReleaseParkActivity;
 import com.example.yiting.activity.SearchActivity;
 import com.example.yiting.adapter.InformationAdapter;
-import com.example.yiting.bean.InformationBean;
+import com.example.yiting.bean.Information;
 import com.example.yiting.utils.Constant;
 import com.example.yiting.utils.SpUtils;
 import com.example.yiting.view.MyListView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -37,6 +47,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class HomeFragment extends BaseFragment {
 
@@ -51,25 +62,33 @@ public class HomeFragment extends BaseFragment {
 
     private MyLocationListener myListener = null;
     private InformationAdapter adapter;
-    private List<InformationBean> infos = new ArrayList<>();
+    private List<Information> informations;
 
     @Override
     protected void initView() {
         initBanner();
-
-        for (int i = 0; i < 4; i++) {
-            infos.add(new InformationBean());
-        }
-
-        adapter = new InformationAdapter(mContext, infos);
+        adapter = new InformationAdapter(mContext, null);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(mContext, InformationDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("info", informations.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         getCity();
         // 检查权限
 //        checkPermission();
+        getInformation();
 
     }
 
     public void getCity() {
+        String city = SpUtils.getString(mContext, Constant.CUR_CITY);
+        tvCity.setText(city);
         mLocationClient = new LocationClient(mContext);
         myListener = new MyLocationListener();
         mLocationClient.registerLocationListener(myListener);
@@ -78,6 +97,35 @@ public class HomeFragment extends BaseFragment {
         option.setIsNeedAddress(true);
         mLocationClient.setLocOption(option);
         mLocationClient.start();
+    }
+
+    public void getInformation() {
+        OkHttpUtils.get().url(Constant.GET_INFORMATION)
+                .addParams("pageNo", "1")
+                .addParams("pageSize", "4")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        String str = SpUtils.getString(mContext, "home_information");
+                        if(!TextUtils.isEmpty(str)) {
+                            parseJson(str);
+                        }
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        SpUtils.putString(mContext, "home_information", response);
+                        parseJson(response);
+                    }
+                });
+    }
+
+    public void parseJson(String json) {
+        JSONObject jsonObject = JSON.parseObject(json);
+        String str = jsonObject.getString("information");
+        informations = JSON.parseArray(str, Information.class);
+        adapter.setData(informations);
     }
 
     public void checkPermission() {
@@ -142,7 +190,7 @@ public class HomeFragment extends BaseFragment {
         banner.start();
     }
 
-    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.rl_title})
+    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.rl_title, R.id.ll_more, R.id.iv_msg})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll1:
@@ -157,6 +205,10 @@ public class HomeFragment extends BaseFragment {
                 EventBus.getDefault().post(3);
                 break;
             case R.id.ll4:
+            case R.id.ll_more:
+                startActivity(new Intent(mContext, InformationAllActivity.class));
+                break;
+            case R.id.iv_msg:
                 break;
         }
     }

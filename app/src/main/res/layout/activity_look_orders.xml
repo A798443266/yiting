@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2"
+    android:id="@+id/root"
+    tools:context=".activity.MyShareActivity">
+
+    <include android:id="@+id/title_bar" layout="@layout/title_bar"/>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refreshLayout"
+        app:srlPrimaryColor="@color/systemColor"
+        app:srlDisableContentWhenLoading="false"
+        app:srlDisableContentWhenRefresh="false"
+        app:srlEnableLoadMoreWhenContentNotFull="false"
+        android:layout_below="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:listSelector="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:divider="@null"
+            android:scrollbars="none"
+            android:layout_marginBottom="30dp"/>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="fitCenter"
+            android:background="@drawable/icon_no_order" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前共享的车位还没有人预定哦~"
+            android:layout_marginTop="12dp"
+            android:textSize="13sp"
+            android:textColor="#707070"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

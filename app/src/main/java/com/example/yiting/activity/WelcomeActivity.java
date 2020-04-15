@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.yiting.R;
+import com.example.yiting.parkadmin.activity.MainAdminActivity;
 import com.example.yiting.utils.Constant;
 import com.example.yiting.utils.SpUtils;
 
@@ -55,7 +56,11 @@ public class WelcomeActivity extends AppCompatActivity {
     private void toMainOrLogin() {
         boolean isLogin = SpUtils.getBoolean(this, Constant.ISLOGIN);
         if (isLogin) {
-            startActivity(new Intent(this, MainActivity.class));
+            boolean isAdmin = SpUtils.getBoolean(this, Constant.ISADMIN);
+            if (isAdmin)
+                startActivity(new Intent(this, MainAdminActivity.class));
+            else
+                startActivity(new Intent(this, MainActivity.class));
         } else {
             startActivity(new Intent(this, LoginActivity.class));
         }

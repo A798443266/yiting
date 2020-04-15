@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,14 +14,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.yiting.R;
 import com.example.yiting.bean.ParkingLot;
-import com.example.yiting.bean.ShareInfo;
-import com.example.yiting.bean.User;
-import com.example.yiting.bean.UserSharePark;
 import com.example.yiting.utils.Constant;
+import com.example.yiting.utils.NavigationUtil;
 import com.example.yiting.utils.StatusBarUtil;
+import com.example.yiting.utils.UIUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
+import com.zyyoona7.popup.EasyPopup;
+import com.zyyoona7.popup.XGravity;
+import com.zyyoona7.popup.YGravity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +33,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ParkInfoDetailActivity extends AppCompatActivity {
-
+    @BindView(R.id.root)
+    RelativeLayout root;
     @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.tv_name)
@@ -44,8 +49,11 @@ public class ParkInfoDetailActivity extends AppCompatActivity {
     TextView tvFree;
     @BindView(R.id.tv_cappedPrice)
     TextView tvCappedPrice;
+    @BindView(R.id.tv_description)
+    TextView tvDescription;
 
     private ParkingLot parkingLot;
+    private EasyPopup popNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,16 +64,18 @@ public class ParkInfoDetailActivity extends AppCompatActivity {
 
         parkingLot = (ParkingLot) getIntent().getSerializableExtra("info");
         initView();
+        initPop();
     }
 
     public void initView() {
         if (parkingLot == null) return;
         tvName.setText(parkingLot.getName());
         tvAddress.setText(parkingLot.getProvince() + "省" + parkingLot.getCity() + "市" + parkingLot.getAddress());
-//        tvFree.setText();
+        tvFree.setText(parkingLot.getFreeDuration() == null ? "未知" : parkingLot.getFreeDuration() + "");
         tvCur.setText(parkingLot.getCurrent() + "");
         tvPrice.setText(parkingLot.getPrice() + "");
-//        tvCappedPrice.setText(parkingLot.getCappedPrice()+"");
+        tvCappedPrice.setText(parkingLot.getCappedPrice() == null ? "未知" : parkingLot.getCappedPrice() + "");
+        tvDescription.setText(parkingLot.getDescription() == null ? "暂无描述" : parkingLot.getDescription() + "");
         initBanner();
     }
 
@@ -94,6 +104,45 @@ public class ParkInfoDetailActivity extends AppCompatActivity {
         banner.start();
     }
 
+    private void initPop() {
+        View view = View.inflate(this, R.layout.pop_select_daohang_way, null);
+        popNav = new EasyPopup(this)
+                .setContentView(view)
+                .setWidth(ViewGroup.LayoutParams.MATCH_PARENT)
+                .setHeight(UIUtils.dp2px(159))
+                .setBackgroundDimEnable(true)
+                .setAnimationStyle(R.style.pop_park_info_animation)
+                .setDimValue(0.2f)
+                .setFocusAndOutsideEnable(true)
+                .apply();
+
+        popNav.findViewById(R.id.ll1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double longitude = parkingLot.getLongitude();
+                double latitude = parkingLot.getLatitude();
+                NavigationUtil.navBaidu(ParkInfoDetailActivity.this, longitude, latitude);
+                popNav.dismiss();
+            }
+        });
+        popNav.findViewById(R.id.ll2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double longitude = parkingLot.getLongitude();
+                double latitude = parkingLot.getLatitude();
+                NavigationUtil.navGaode(ParkInfoDetailActivity.this, longitude, latitude);
+                popNav.dismiss();
+            }
+        });
+
+        popNav.findViewById(R.id.ll3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popNav.dismiss();
+            }
+        });
+    }
+
     @OnClick({R.id.rl_back, R.id.rl_collect, R.id.ll_daohang, R.id.ll_yuding})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -103,6 +152,7 @@ public class ParkInfoDetailActivity extends AppCompatActivity {
             case R.id.rl_collect:
                 break;
             case R.id.ll_daohang:
+                popNav.showAtAnchorView(root, YGravity.ALIGN_BOTTOM, XGravity.CENTER, 0, 0);
                 break;
             case R.id.ll_yuding:
                 break;
