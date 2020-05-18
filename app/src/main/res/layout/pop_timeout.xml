@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:cardCornerRadius="5dp"
+	android:background="@android:color/transparent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/systemWhite"
+		android:orientation="vertical">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="10dp"
+			android:text="车主超时违停拍照上传，管理员审核通过后会对车主进行相应的处罚"
+			android:textColor="#555"
+			android:textSize="12sp" />
+
+		<ImageView
+			android:id="@+id/iv"
+			android:layout_width="150dp"
+			android:layout_height="120dp"
+			android:layout_marginTop="15dp"
+			android:scaleType="fitCenter"
+			android:layout_gravity="center_horizontal"/>
+
+		<EditText
+			android:id="@+id/et_remark"
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:padding="5dp"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"
+			android:lines="3"
+			android:gravity="start"
+			android:background="@drawable/editview_bg"
+			android:textColor="#555"
+			android:hint="备注情况说明(选填)"
+			android:textColorHint="#888"
+			android:textSize="14sp" />
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginTop="15dp"
+			android:background="#f2f2f2" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:layout_marginTop="10dp"
+			android:paddingBottom="15dp">
+
+			<Button
+				android:id="@+id/btn_cancel"
+				android:layout_width="80dp"
+				android:layout_height="30dp"
+				android:text="取 消"
+				android:textSize="15sp"
+				android:textColor="@color/systemWhite"
+				android:background="@drawable/button_enable_bg"/>
+
+
+			<Button
+				android:id="@+id/btn_ok"
+				android:layout_width="80dp"
+				android:layout_height="30dp"
+				android:layout_marginLeft="50dp"
+				android:text="确 定"
+				android:textSize="15sp"
+				android:textColor="@color/systemWhite"
+				android:background="@drawable/button_bg"/>
+		</LinearLayout>
+	</LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

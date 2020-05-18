@@ -28,7 +28,6 @@
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
 					app:image_scale_type="center_crop"
-					android:background="@drawable/no_pic"
 					app:indicator_height="8dp"
 					app:indicator_margin="5dp"
 					app:indicator_width="8dp" />

@@ -13,12 +13,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title"
+        android:layout_above="@+id/ll_bottom">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
@@ -39,7 +40,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="发布者："
+                        android:text="预定者："
                         android:textColor="#333"
                         android:textSize="14sp" />
 
@@ -59,28 +60,6 @@
                         android:lines="1"
                         android:text="小明"
                         android:textColor="#333"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/icon_addr" />
-
-                    <TextView
-                        android:id="@+id/tv_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="白杨街道浙江理工大学下沙校区"
-                        android:textColor="#666"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -235,9 +214,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:text="未开始"
-                        android:textStyle="bold"
                         android:textColor="@color/systemColor"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -245,7 +224,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_picNo"
+                android:id="@+id/ll_pic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -259,9 +238,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="我上传的停车图片信息: "
-                    android:textColor="#666"
-                    android:textSize="12sp" />
+                    android:text="预定车主上传的停车图片信息: "
+                    android:textColor="#222"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/iv"
@@ -272,8 +252,84 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_verify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/systemWhite"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:visibility="gone"
+                android:paddingTop="20dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="20dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="停车位业主上传的超时违停图片信息: "
+                    android:textColor="#222"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+
+                <ImageView
+                    android:id="@+id/iv_verify"
+                    android:layout_width="100dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="center" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="审核状态："
+                        android:textColor="#666"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_verify_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="待审核"
+                        android:textColor="@color/systemColor"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="上传时间："
+                        android:textColor="#666"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_verify_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="2020-05-01"
+                        android:textColor="#666"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </ScrollView>
 
     <LinearLayout
@@ -285,7 +341,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="#22000000" />
 
         <LinearLayout
@@ -302,34 +358,17 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/btn_start"
-                    android:layout_width="100dp"
+                    android:id="@+id/btn"
+                    android:layout_width="120dp"
                     android:layout_height="35dp"
                     android:background="@drawable/button_bg"
-                    android:text="开  始"
+                    android:text="超时违停拍照"
                     android:textColor="@color/systemWhite"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/btn_end"
-                    android:layout_width="100dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/button_enable_bg"
-                    android:clickable="false"
-                    android:text="结  束"
-                    android:textColor="@color/systemWhite"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

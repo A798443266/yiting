@@ -1,7 +1,7 @@
 package com.example.yiting.utils;
 
 public class Constant {
-    public static String BASE = "http://192.168.1.4:8888";
+    public static String BASE = "http://192.168.137.15:8888";
 
     public static final String SP_NAME = "sp_yiting";//sp名称
     public static final String ISLOGIN = "islogin";//是否已经登录
@@ -12,6 +12,7 @@ public class Constant {
     public static final String CUR_CITY = "curCity"; // 当前定位城市
 
     public static final String LOGIN = BASE + "/login";
+    public static final String REGISTER = BASE + "/registerUser";
     public static final String PARK_ADMIN_LOGIN = BASE + "/parkAdminLogin";
     public static final String ADD_SHARE = BASE + "/addShare";
     public static final String GETALLSHARE = BASE + "/getAllShareInfo";
@@ -29,5 +30,8 @@ public class Constant {
     public static final String  GET_SHARE_BOOK_DETAIL= BASE + "/getShareOrderBookDetail";
     public static final String TUIDING = BASE + "/tuiding";
     public static final String DELETE_CAR = BASE + "/deleteCar";
-
+    public static final String UPDATE_ORDER_START  = BASE + "/startShareOrder";
+    public static final String UPDATE_ORDER_END = BASE + "/endShareOrder";
+    public static final String GET_UpPicByOrderId  = BASE + "/getUpPicByOrderId";
+    public static final String UP_TIMEOUT = BASE + "/upTimeoutVerify";
 }

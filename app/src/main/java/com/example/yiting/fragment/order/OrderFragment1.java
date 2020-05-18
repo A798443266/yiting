@@ -132,6 +132,9 @@ public class OrderFragment1 extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, OrderDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("info", shareOrderInfos.get(position));
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

@@ -1,7 +1,9 @@
 package com.example.yiting.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -70,6 +72,17 @@ public class LookOrdersActivity extends AppCompatActivity {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
                 refreshlayout.finishLoadMore(false);//传入false表示加载失败
+            }
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(LookOrdersActivity.this, BookDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("info", shareOrderInfos.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }

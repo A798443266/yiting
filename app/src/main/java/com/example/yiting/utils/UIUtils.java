@@ -86,6 +86,12 @@ public class UIUtils {
         return format;
     }
 
+    public static String formatDate1(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = sdf.format(date);
+        return format;
+    }
+
     /**
      * 质量压缩方法
      *

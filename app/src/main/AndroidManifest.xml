@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.OrderDetailActivity"></activity>
+        <activity android:name=".activity.BookDetailsActivity"></activity>
+        <activity android:name=".activity.OrderDetailActivity" />
         <activity android:name=".activity.MyCarsActivity" />
         <activity android:name=".activity.LookOrdersActivity" />
         <activity android:name=".activity.MyShareActivity" />

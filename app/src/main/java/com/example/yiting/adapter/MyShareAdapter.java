@@ -89,7 +89,7 @@ public class MyShareAdapter extends BaseAdapter {
         holder.tv_name.setText(sharePark.getAddress());
         holder.tv_price.setText(sharePark.getPrice() + "");
         holder.tv_status.setText(status[sharePark.getReview()]);
-//        holder.tv_createTime.setText(sharePark.getSubmittime());
+        holder.tv_createTime.setText(sharePark.getSubmittime());
         holder.tv_day.setText(sharePark.getDay());
         holder.tv_startTime.setText(sharePark.getStarttime());
         holder.tv_endTime.setText(sharePark.getEndtime());

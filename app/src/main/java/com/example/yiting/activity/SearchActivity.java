@@ -16,9 +16,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
@@ -45,16 +43,13 @@ import com.iflytek.cloud.SpeechRecognizer;
 import com.zyyoona7.popup.EasyPopup;
 import com.zyyoona7.popup.XGravity;
 import com.zyyoona7.popup.YGravity;
-
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
