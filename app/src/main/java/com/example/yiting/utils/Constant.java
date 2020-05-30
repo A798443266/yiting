@@ -1,8 +1,8 @@
 package com.example.yiting.utils;
 
 public class Constant {
-    public static String BASE = "http://192.168.137.15:8888";
-
+    public static String BASE = "http://192.168.43.93:8888";
+//    public static String BASE = "http://47.100.138.80:8888";
     public static final String SP_NAME = "sp_yiting";//sp名称
     public static final String ISLOGIN = "islogin";//是否已经登录
     public static final String ISADMIN = "isAdmin";//当前登录的是否是车场管理员

@@ -31,6 +31,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -71,7 +72,8 @@ public class LoginActivity extends AppCompatActivity {
     private int i = 30;
     private String nick;
     private String password;
-    private String phone;
+    private String phone; //登录的phone
+    private String phoneNum; //注册的phone
     private Boolean isLogin = true;
     private Boolean isUser = true;  // 普通用户登录
 
@@ -81,14 +83,31 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        //registerEventHandler是用来往SMSSDK中注册一个事件接收器
+        EventHandler eventHandler = new EventHandler() {
+            @Override
+            public void afterEvent(int event, int result, Object data) {
+                super.afterEvent(event, result, data);
+                Message msg = new Message();
+                msg.arg1 = event;
+                msg.arg2 = result;
+                msg.obj = data;
+                msg.what = 3;
+                handler.sendMessage(msg);
+            }
+        };
+
+        SMSSDK.registerEventHandler(eventHandler);
+
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.rb1) {
-                    isUser = true;
-                } else {
-                    isUser = false;
-                }
+                isUser = (checkedId == R.id.rb1);
+//                if (checkedId == R.id.rb1) {
+//                    isUser = true;
+//                } else {
+//                    isUser = false;
+//                }
             }
         });
     }
@@ -198,7 +217,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //获取验证码
     public void getSMS() {
-        String phoneNum = etRgPhone.getText().toString().trim();
+        phoneNum = etRgPhone.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNum)) {
             Toast.makeText(this, "手机号码不能为空", Toast.LENGTH_SHORT).show();
             return;
@@ -227,7 +246,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-
         nick = etNick.getText().toString();
         password = etRgPassword.getText().toString();
         String psw1 = etRgPassword1.getText().toString();
@@ -255,7 +273,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void confirm() {
-        String phoneNum = etPhone.getText().toString().trim();
+        String phoneNum = etRgPhone.getText().toString().trim();
         String code = etChecckNum.getText().toString().trim();
         SMSSDK.submitVerificationCode("86", phoneNum, code);
     }
@@ -284,7 +302,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (result == SMSSDK.RESULT_COMPLETE) {
                         // TODO 处理验证码验证通过的结果
-                        // Toast.makeText(RegisterActivity.this, "验证码正确", Toast.LENGTH_SHORT).show();
+//                         Toast.makeText(LoginActivity.this, "验证码正确", Toast.LENGTH_SHORT).show();
                         //去自己的服务器中注册
                         JSONObject object = new JSONObject();
                         try {
@@ -315,6 +333,8 @@ public class LoginActivity extends AppCompatActivity {
                                         if (code == 200) {
                                             Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                                             backLogin();
+                                        } else if(code == 300) {
+                                            Toast.makeText(LoginActivity.this, "该手机号已经被注册", Toast.LENGTH_SHORT).show();
                                         } else {
                                             Toast.makeText(LoginActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                                         }
@@ -324,7 +344,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         // TODO 处理错误的结果
                         Toast.makeText(LoginActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
-                        ((Throwable) data).printStackTrace();
+//                        ((Throwable) data).printStackTrace();
                     }
                 }
 
@@ -341,11 +361,15 @@ public class LoginActivity extends AppCompatActivity {
         llRegister.setVisibility(View.GONE);
         llLogin.setVisibility(View.VISIBLE);
 
+        etPhone.setText(phoneNum);
+        etPassword.setText("");
+
         etRgPassword1.setText("");
         etRgPassword.setText("");
         etChecckNum.setText("");
         etNick.setText("");
-        etPhone.setText("");
+        etRgPhone.setText("");
+        handler.removeCallbacksAndMessages(null);
     }
 
     @Override

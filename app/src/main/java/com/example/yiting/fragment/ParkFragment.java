@@ -12,11 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
-
 import androidx.cardview.widget.CardView;
-
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -356,7 +353,7 @@ public class ParkFragment extends BaseFragment {
     }
 
     public void getAllShare(double latitude, double longitude) {
-        Log.e("TAG", latitude + ", " + longitude);
+//        Log.e("TAG", latitude + ", " + longitude);
         OkHttpUtils.get().url(Constant.GETALLSHARE)
                 .addParams("latitude", latitude + "")
                 .addParams("longitude", longitude + "")
@@ -380,7 +377,7 @@ public class ParkFragment extends BaseFragment {
                             isLoad = false;
                             return;
                         }
-                        //清楚上一次的marker
+                        //清除上一次的marker
                         map.clear();
                         //用户共享车位
                         if (!TextUtils.isEmpty(shareStr)) {
@@ -427,8 +424,7 @@ public class ParkFragment extends BaseFragment {
                 .fromView(getActivity().getLayoutInflater().inflate(R.layout.icon_park, null));
         for (int i = 0; i < parkingLots.size(); i++) {
             ParkingLot parkingLot = parkingLots.get(i);
-            LatLng point = new LatLng(parkingLot.getLatitude(),
-                    parkingLot.getLongitude());
+            LatLng point = new LatLng(parkingLot.getLatitude(), parkingLot.getLongitude());
 
             Bundle bundle = new Bundle();
             bundle.putSerializable("info", parkingLot);
